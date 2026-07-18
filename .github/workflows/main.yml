@@ -18,8 +18,12 @@ jobs:
 
       - name: Build APK
         run: |
-          # Chạy buildozer, nó sẽ tự cài SDK/NDK
-          # Chúng ta thêm "yes |" để tự động đồng ý giấy phép của Android
+          # Cấu hình Android SDK license
+          mkdir -p ~/.android
+          touch ~/.android/repositories.cfg
+          
+          # Chạy buildozer
+          # Dùng 'yes |' để tự động đồng ý mọi thỏa thuận
           yes | buildozer android debug
 
       - name: Upload APK

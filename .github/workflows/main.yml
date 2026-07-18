@@ -16,7 +16,7 @@ jobs:
           pip3 install --upgrade pip
           pip3 install --user --upgrade buildozer cython
 
-            - name: Build APK
+      - name: Build APK
         run: |
           export BUILDOZER_ALLOW_RELOCATE=1
           # Xóa sạch platform cũ để cài lại NDK mới

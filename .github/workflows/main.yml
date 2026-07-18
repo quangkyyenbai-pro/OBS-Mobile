@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4  # Đã cập nhật lên v4
 
     - name: Build with Buildozer
       uses: ArtemSBulgakov/buildozer-action@v1
@@ -15,8 +15,7 @@ jobs:
         buildozer_version: latest
 
     - name: Upload artifacts
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4 # Đã cập nhật lên v4 để sửa lỗi
       with:
         name: package
         path: ${{ steps.buildozer.outputs.filename }}
-        

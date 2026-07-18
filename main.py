@@ -12,7 +12,7 @@ from kivy.uix.widget import Widget
 from plyer import filechooser
 
 # Đường dẫn đến file ffmpeg đã được đóng gói trong thư mục gốc của app
-ffmpeg_path = os.path.join(os.getcwd(), 'ffmpeg')
+ffmpeg_path = os.path.join(os.getcwd(), 'bin', 'ffmpeg')
 
 class OBSMobileUI(BoxLayout):
     def __init__(self, **kwargs):

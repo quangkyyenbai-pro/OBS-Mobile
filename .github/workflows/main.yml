@@ -5,17 +5,20 @@ jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4  # Đã cập nhật lên v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-    - name: Build with Buildozer
-      uses: ArtemSBulgakov/buildozer-action@v1
-      id: buildozer
-      with:
-        buildozer_version: latest
+      - name: Build with Buildozer
+        uses: kivy/buildozer-action@master
+        with:
+          buildozer_version: master
+          workdir: .
+        env:
+          # Đảm bảo Buildozer không bị treo ở bước accept license
+          ANDROIDSDK_ACCEPT_LICENSES: 1
 
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v4 # Đã cập nhật lên v4 để sửa lỗi
-      with:
-        name: package
-        path: ${{ steps.buildozer.outputs.filename }}
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: package
+          path: bin/*.apk

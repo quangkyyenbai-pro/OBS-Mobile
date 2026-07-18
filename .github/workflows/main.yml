@@ -9,24 +9,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install system dependencies
+      - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
+          pip3 install --upgrade pip
+          pip3 install --user --upgrade buildozer cython
 
-      - name: Install Buildozer
+      - name: Build APK
         run: |
-          pip3 install --user --upgrade buildozer
-          # Cài đặt thêm các thành phần phụ thuộc cho buildozer
-          pip3 install --user cython==0.29.33
-
-      - name: Build with Buildozer
-        run: |
-          # Buildozer sẽ tự động tải Android SDK/NDK trong lần chạy đầu tiên
-          buildozer android debug
+          # Chạy buildozer, nó sẽ tự cài SDK/NDK
+          # Chúng ta thêm "yes |" để tự động đồng ý giấy phép của Android
+          yes | buildozer android debug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: package
           path: bin/*.apk
+          
